@@ -23,6 +23,7 @@ namespace lab8
         public MainWindow()
         {
             InitializeComponent();
+
         }
     }
 }
