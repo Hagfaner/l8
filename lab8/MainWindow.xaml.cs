@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using lab8;
 namespace lab8
 {
     /// <summary>
@@ -20,10 +20,17 @@ namespace lab8
     /// </summary>
     public partial class MainWindow : Window
     {
+        Standart exp = new Standart();
         public MainWindow()
         {
+            
             InitializeComponent();
+           
+        }
 
+        private void equils_Click(object sender, RoutedEventArgs e)
+        {
+            display.Text=exp.calculation(display.Text);
         }
     }
 }
