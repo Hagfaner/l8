@@ -22,7 +22,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock x:Name="sec_display" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4"  FontSize="18" TextAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBox x:Name="display" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="5" BorderThickness="0"  FontSize="22" TextAlignment="Left" VerticalAlignment="Center"></TextBox>
+            <TextBlock x:Name="display" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="5"   FontSize="24" TextAlignment="Left" VerticalAlignment="Center" Margin="10"></TextBlock>
         </Grid>
         <Grid Height="300"  VerticalAlignment="Bottom" >
             <Grid.RowDefinitions>

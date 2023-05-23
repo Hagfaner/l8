@@ -132,13 +132,12 @@ namespace lab8
 
         private void clear_last_number_Click(object sender, RoutedEventArgs e)
         {
-            if (display.Text.Length <= 1)
+            display.Text = display.Text.Remove(display.Text.Length - 1);
+            if (display.Text.Length < 1 || display.Text == "-")
             {
                 display.Text = "0";
             }
-            else { 
-            display.Text = display.Text.Remove(display.Text.Length - 1);
-            }
+            
         }
     }
 }
