@@ -24,6 +24,7 @@ namespace lab8
         static char oper =' ';
         static bool dec_point;
         static bool postequil = false;
+        static bool firstop = false;
         public MainWindow()
         {
             
@@ -37,8 +38,8 @@ namespace lab8
         {
             if (postequil)
             {
-                sec_display.Text ="" ;
                 display.Text = "0";
+                sec_display.Text = "";
                 postequil = false;
             }
             string buf=sender.ToString();
@@ -52,6 +53,10 @@ namespace lab8
 
         private void clear__Click(object sender, RoutedEventArgs e)
         {
+            if (postequil)
+            {
+                sec_display.Text = "";
+            }
             display.Text = "0";
             dec_point = false;
             dec.IsEnabled = true;
@@ -61,16 +66,31 @@ namespace lab8
         {
             display.Text = "0";
             sec_display.Text = "";
+            firstop = false;
             dec_point = false;
             dec.IsEnabled = true;
         }
 
         private void operations_click(object sender, RoutedEventArgs e)
         {
+            string buf;
             postequil = false;
-            oper = exp.operations(sender);
-            sec_display.Text = display.Text +' '+oper+' ';
+            
+            if (firstop) {
+
+                buf = exp.calculation(sec_display.Text + display.Text, oper);
+                oper = exp.operations(sender);
+                sec_display.Text = buf + ' ' + oper + ' ';
+
+            }
+            else
+            {
+                oper = exp.operations(sender);
+                sec_display.Text = display.Text +' '+oper+' ';
+            }
+            
             dec_point = false;
+            firstop = true;
             dec.IsEnabled = true;
             display.Text = "0";
         }
@@ -85,6 +105,7 @@ namespace lab8
                 dec_point = false;
                 dec.IsEnabled = true;
                 postequil = true;
+                firstop = false;
             }
            
             
@@ -99,6 +120,18 @@ namespace lab8
 
         private void one_div_x_Click(object sender, RoutedEventArgs e)
         {
+            string buf;
+            if (firstop)
+            {
+
+                buf = exp.calculation(sec_display.Text + display.Text, oper);
+                
+                display.Text = buf;
+                firstop = false;
+
+            }
+            oper = ' ';
+
             sec_display.Text = "1/" + display.Text +"=";
             display.Text = exp.div1x(display.Text);
             postequil = true;
@@ -107,17 +140,39 @@ namespace lab8
         private void neg_Click(object sender, RoutedEventArgs e)
         {
             display.Text = exp.negativ(display.Text);
-            postequil = true;
+           
         }
 
         private void sqrt_x_Click(object sender, RoutedEventArgs e)
         {
+            string buf;
+            if (firstop)
+            {
+
+                buf = exp.calculation(sec_display.Text + display.Text, oper);
+
+                display.Text = buf;
+                firstop = false;
+
+            }
+            oper = ' ';
             sec_display.Text = "sqrt(" + display.Text + ")=";
             display.Text = exp.sqrtx(display.Text);
             postequil = true;
         }
         private void sqr_x_Click(object sender, RoutedEventArgs e)
         {
+            string buf;
+            if (firstop)
+            {
+
+                buf = exp.calculation(sec_display.Text + display.Text, oper);
+
+                display.Text = buf;
+                firstop = false;
+
+            }
+            oper = ' ';
             sec_display.Text = display.Text + "^2 =";
             display.Text = exp.pow_2(display.Text);
             postequil = true;
@@ -125,6 +180,17 @@ namespace lab8
       
         private void powof2_Click(object sender, RoutedEventArgs e)
         {
+            string buf;
+            if (firstop)
+            {
+
+                buf = exp.calculation(sec_display.Text + display.Text, oper);
+
+                display.Text = buf;
+                firstop = false;
+
+            }
+            oper = ' ';
             sec_display.Text = "2^"+display.Text+"=";
             display.Text = exp.powof2(display.Text);
             postequil = true;
@@ -132,7 +198,12 @@ namespace lab8
 
         private void clear_last_number_Click(object sender, RoutedEventArgs e)
         {
+            if (display.Text.IndexOf(',') != -1)
+            {
+                if (display.Text[display.Text.Length - 1] == ',') { dec_point = false; dec.IsEnabled = true; }
+            }
             display.Text = display.Text.Remove(display.Text.Length - 1);
+
             if (display.Text.Length < 1 || display.Text == "-")
             {
                 display.Text = "0";
