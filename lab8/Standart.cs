@@ -90,7 +90,7 @@ namespace lab8
         public string div1x(string expression)
         {
             double x = double.Parse(expression);
-            return (1.0/x).ToString();
+            return ((double)1.0/x).ToString();
         }
         public string sqrtx (string expression)
         {

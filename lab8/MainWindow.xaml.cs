@@ -66,6 +66,7 @@ namespace lab8
         {
             display.Text = "0";
             sec_display.Text = "";
+            firstop = false;
             dec_point = false;
             dec.IsEnabled = true;
         }
@@ -139,11 +140,21 @@ namespace lab8
         private void neg_Click(object sender, RoutedEventArgs e)
         {
             display.Text = exp.negativ(display.Text);
-            postequil = true;
+           
         }
 
         private void sqrt_x_Click(object sender, RoutedEventArgs e)
         {
+            string buf;
+            if (firstop)
+            {
+
+                buf = exp.calculation(sec_display.Text + display.Text, oper);
+
+                display.Text = buf;
+                firstop = false;
+
+            }
             oper = ' ';
             sec_display.Text = "sqrt(" + display.Text + ")=";
             display.Text = exp.sqrtx(display.Text);
@@ -151,6 +162,16 @@ namespace lab8
         }
         private void sqr_x_Click(object sender, RoutedEventArgs e)
         {
+            string buf;
+            if (firstop)
+            {
+
+                buf = exp.calculation(sec_display.Text + display.Text, oper);
+
+                display.Text = buf;
+                firstop = false;
+
+            }
             oper = ' ';
             sec_display.Text = display.Text + "^2 =";
             display.Text = exp.pow_2(display.Text);
@@ -159,6 +180,16 @@ namespace lab8
       
         private void powof2_Click(object sender, RoutedEventArgs e)
         {
+            string buf;
+            if (firstop)
+            {
+
+                buf = exp.calculation(sec_display.Text + display.Text, oper);
+
+                display.Text = buf;
+                firstop = false;
+
+            }
             oper = ' ';
             sec_display.Text = "2^"+display.Text+"=";
             display.Text = exp.powof2(display.Text);
